@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Authorize Access</title>
+</head>
+<body>
+    <h2>Application Requests Access</h2>
+    <p>Client ID: {{ client_id }}</p>
+    <p>Requested Permissions:</p>
+    <ul>
+        {% for s in scope %}
+            <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/authorize" method="get">
+        <input type="hidden" name="client_id" value="{{ client_id }}">
+        <input type="hidden" name="redirect_uri" value="{{ redirect_uri }}">
+        <input type="hidden" name="scope" value="{{ scope }}">
+        <input type="hidden" name="state" value="{{ state }}">
+        <button type="submit">Allow</button>
+    </form>
+
+    <form action="/deny" method="post">
+        <button type="submit">Deny</button>
+    </form>
+</body>
+</html>
